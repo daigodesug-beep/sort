@@ -1,5 +1,7 @@
 ﻿  Main.cpp
-  QuickSort.cpp
-C:\Users\student\Desktop\Main.cpp(4,10): error C1083: include ファイルを開けません。'BubbleSort.h':No such file or directory
-D:\GitHub\ソート\ソート\QuickSort.cpp(9,26): error C3861: 'partition': 識別子が見つかりませんでした
-  コードを生成中...
+D:\GitHub\ソート\ソート\Main.cpp(43,20): warning C4244: '初期化中': '_Rep' から 'double' への変換です。データが失われる可能性があります。
+D:\GitHub\ソート\ソート\Main.cpp(43,20): warning C4244:         with
+D:\GitHub\ソート\ソート\Main.cpp(43,20): warning C4244:         [
+D:\GitHub\ソート\ソート\Main.cpp(43,20): warning C4244:             _Rep=__int64
+D:\GitHub\ソート\ソート\Main.cpp(43,20): warning C4244:         ]
+  ソート.vcxproj -> D:\GitHub\ソート\x64\Debug\ソート.exe

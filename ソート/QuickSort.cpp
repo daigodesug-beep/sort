@@ -1,38 +1,28 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
+#include "QuickSort.h"
 
-// 配列全体をクイックソートする関数
-void quickSort(int arr[], int left, int right) {
-    if (left < right) {
-        // ピボットを決定し、分割する位置を返す
-        int pivotIndex = partition(arr, left, right);
+void QuickSort::QuickSortRecursive(int* array, int left, int right)
+{
+    int i = left;
+    int j = right;
+    int pivot = array[(left + right) / 2];
 
-        // 左側の部分配列を再帰的にソート
-        quickSort(arr, left, pivotIndex - 1);
+    while (i <= j)
+    {
+        while (array[i] < pivot) i++;
+        while (array[j] > pivot) j--;
 
-        // 右側の部分配列を再帰的にソート
-        quickSort(arr, pivotIndex + 1, right);
-    }
-}
-
-// 分割処理を行う関数
-int partition(int arr[], int left, int right) {
-    // ここでピボットを選択する（例：配列の右端）
-    int pivot = arr[right];
-    // 左端からのインデックス
-    int i = left - 1;
-
-    for (int j = left; j < right; j++) {
-        // 現在の要素がピボットより小さい場合
-        if (arr[j] < pivot) {
+        if (i <= j)
+        {
+            Swap(array[i], array[j]);
             i++;
-            // arr[i]とarr[j]を交換
-            std::swap(arr[i], arr[j]);
+            j--;
         }
     }
-    // ピボットを正しい位置に移動させる
-    std::swap(arr[i + 1], arr[right]);
-    // ピボットのインデックスを返す
-    return i + 1;
+    if (left < j) QuickSortRecursive(array, left, j);
+    if (i < right) QuickSortRecursive(array, i, right);
+}
+
+void QuickSort::Exec(int* array, int size)
+{
+    QuickSortRecursive(array, 0, size - 1);
 }

@@ -3,6 +3,9 @@
 
 class QuickSort : public Sort
 {
+private:
+    void QuickSortRecursive(int* array, int left, int right);
+
 public:
-	virtual void Exec(int* array, int size) override;
+    void Exec(int* array, int size) override;
 };

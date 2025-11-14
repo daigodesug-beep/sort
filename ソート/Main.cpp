@@ -1,49 +1,53 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include "BubbleSort.h"
-//#include "SelectionSort.h"
-//#include "InsertionSort.h"
-//#include "QuickSort.h"
-//#include "RadixSort.h"
+#include <cstdlib> // rand()
+#include "QuickSort.h"
+#include "InsertionSort.h"
+
 using namespace std;
 
-void ShowArray(int* array, int size)
+// 配列を表示する関数
+void ShowArray(const vector<int>& array)
 {
-	for (int i = 0; i < size; i++)
-	{
-		cout << array[i] << ' ';
-	}
-	cout << endl;
+    for (int num : array)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
 }
 
 int main()
 {
-	constexpr int Size = 5;
-	Sort* sort = new BubbleSort();
+    constexpr int Size = 10;
 
-	// 配列作成
-	vector<int> array(Size);
-	for (int i = 0; i < Size; i++)
-	{
-		array[i] = rand() % 100;
-	}
-	ShowArray(array.data(), Size);
+    // ランダムな配列を作成
+    vector<int> data(Size);
+    for (int i = 0; i < Size; i++)
+    {
+        data[i] = rand() % 100;
+    }
 
-	// 時間計測開始
-	auto start = std::chrono::system_clock::now();
+    cout << "ソート前：";
+    ShowArray(data);
 
-	// ソート実行
-	cout << typeid(*sort).name() << endl;
-	sort->Exec(array.data(), Size);
-	delete sort;
+    // ソートクラスを選ぶ
+    Sort* sorter = new QuickSort();       // クイックソート
+    // Sort* sorter = new InsertionSort();      // 挿入ソート
 
-	// 時間計測終了
-	auto end = std::chrono::system_clock::now();
-	double elapsed = chrono::duration_cast<std::chrono::milliseconds>(end - start).count(); //処理に要した時間をミリ秒に変換
+    auto start = chrono::system_clock::now();
 
-	ShowArray(array.data(), Size);
+    sorter->Exec(data.data(), Size);
 
-	// 所要時間を表示
-	cout << elapsed / 1000.0 << "sec" << endl;
+    auto end = chrono::system_clock::now();
+    double elapsed = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+
+    cout << "ソート後：";
+    ShowArray(data);
+
+    cout << "処理時間：" << elapsed << " ms" << endl;
+
+    delete sorter;
+
+    return 0;
 }
